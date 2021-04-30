@@ -147,3 +147,7 @@ If you need to rebuild an image, e.g. after making changes to the source code, r
 ```
 docker-compose up --build
 ```
+
+## Internal Architecture
+
+Please refer to the README's in the project folders for more specific information such as internal architecture, etc.
