@@ -1,22 +1,6 @@
 version: "3.4"
 
 services:
-  frontend:
-    build: ./train-me-fe
-    ports:
-      - 80:80
-    depends_on:
-      - backend
-    links:
-      - backend
-  backend:
-    build: ./train-me-be
-    ports:
-      - 8080:8080
-    depends_on:
-      - database
-    links:
-      - database
   database:
     image: mysql:8.0.24
     ports:
