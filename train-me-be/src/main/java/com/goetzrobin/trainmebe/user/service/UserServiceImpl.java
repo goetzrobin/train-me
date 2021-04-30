@@ -16,8 +16,14 @@ public class UserServiceImpl implements UserService {
         this.userDAO = userDAO;
     }
 
+    @Override
     public List<User> findAll() {
         return userDAO.findAll();
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        return userDAO.findByEmail(email);
     }
 
 }
