@@ -1,0 +1,28 @@
+version: '3.1'
+
+services:
+  frontend:
+    build: ./train-me-fe
+    ports:
+      - 80:80
+    depends_on: backend
+    links: backend
+  backend:
+    build: ./train-me-be
+    ports:
+      - 8080:8080
+    depends_on: database
+    links: database
+  database:
+    image: mysql:8.0.24
+    ports:
+        - "33061:3306"
+    command: --init-file /data/application/init.sql
+    volumes:
+        - ./config/init.sql:/data/application/init.sql
+    environment:
+        MYSQL_ROOT_USER: root
+        MYSQL_ROOT_PASSWORD: secret
+        MYSQL_DATABASE: train_me
+        MYSQL_USER: springuser
+        MYSQL_PASSWORD: ThePassword
