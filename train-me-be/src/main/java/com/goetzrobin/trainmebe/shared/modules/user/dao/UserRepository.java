@@ -1,11 +1,11 @@
-package com.goetzrobin.trainmebe.user.dao;
+package com.goetzrobin.trainmebe.shared.modules.user.dao;
 
-import com.goetzrobin.trainmebe.user.model.User;
+import com.goetzrobin.trainmebe.shared.modules.user.model.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import javax.transaction.Transactional;
 
-@Transactional()
+@Transactional
 public interface UserRepository extends JpaRepository<User, Long> {
     User findByEmail(String email);
 }

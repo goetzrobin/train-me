@@ -4,8 +4,10 @@ USE train_me;
 create table user (
     user_sysid int not null auto_increment,
     user_email varchar(100) unique,
+    user_password binary(60) not null,
     first_name varchar(100) not null,
     last_name varchar(100) not null,
+    active char(1) default 'Y',
     create_ts date,
     update_ts date,
     primary key (user_sysid)
@@ -52,5 +54,4 @@ grant select,
     delete,
     update on train_me.* to 'springuser' @'%';
 
-INSERT INTO user(user_sysid,user_email,first_name,last_name,create_ts,update_ts) VALUES (0, 'robin.goetz@temple.edu', 'Robin', 'Goetz', SYSDATE(), SYSDATE());
-INSERT INTO user(user_sysid,user_email,first_name,last_name,create_ts,update_ts) VALUES (0, 'test@train.me', 'Train', 'Me', SYSDATE(), SYSDATE());
+INSERT INTO user(user_sysid,user_email,user_password,first_name,last_name,active,create_ts,update_ts) VALUES (1, 'test@train.me', '$2a$10$vX90q3EHkHRdkRox/gUwJuvftzw/fsJO0Uu/LXeZlx0pQ6Zupwloi' ,'Train', 'Me', 'Y', SYSDATE(), SYSDATE());
