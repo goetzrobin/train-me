@@ -4,12 +4,12 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
-export class AppService {
+export class HomeService {
     private baseUrl = `${environment.backendUrl}/users`;
 
     constructor(private httpClient: HttpClient) {}
 
     public getHelloWorld(): Observable<string> {
-        return this.httpClient.get<string>(this.baseUrl);
+        return this.httpClient.get<string>(`${this.baseUrl}/test@train.me`);
     }
 }
