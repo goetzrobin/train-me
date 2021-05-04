@@ -1,6 +1,7 @@
 package com.goetzrobin.trainmebe.app.auth.controller;
 
 import com.goetzrobin.trainmebe.app.auth.model.dto.AuthRequestDTO;
+import com.goetzrobin.trainmebe.app.auth.model.dto.AuthResponseDTO;
 import com.goetzrobin.trainmebe.shared.config.security.JwtTokenUtil;
 import com.goetzrobin.trainmebe.shared.modules.user.model.dto.UserGetDTO;
 import com.goetzrobin.trainmebe.shared.modules.user.model.entity.User;
@@ -29,16 +30,22 @@ public class AuthController {
     private final UserMapper userMapper;
 
     @PostMapping("login")
-    public ResponseEntity<UserGetDTO> login(@RequestBody @Valid AuthRequestDTO request) {
+    public ResponseEntity<AuthResponseDTO<UserGetDTO>> login(@RequestBody @Valid AuthRequestDTO request) {
         try {
             Authentication authenticate = authenticationManager
                     .authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
 
             User user = (User) authenticate.getPrincipal();
+            String token = jwtTokenUtil.generateAccessToken(user);
+
+            AuthResponseDTO<UserGetDTO> userAuthDTO = AuthResponseDTO.<UserGetDTO>builder()
+                    .user(userMapper.userToUserGetDto(user))
+                    .token(token)
+                    .build();
 
             return ResponseEntity.ok()
-                    .header(HttpHeaders.AUTHORIZATION, jwtTokenUtil.generateAccessToken(user))
-                    .body(userMapper.userToUserGetDto(user));
+                    .header(HttpHeaders.AUTHORIZATION, token)
+                    .body(userAuthDTO);
         } catch (BadCredentialsException ex) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
