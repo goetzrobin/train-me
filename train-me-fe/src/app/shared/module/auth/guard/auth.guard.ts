@@ -1,4 +1,3 @@
-import { tap } from 'rxjs/operators';
 import { AuthService } from '../service/auth/auth.service';
 import { Injectable } from '@angular/core';
 import {
@@ -16,7 +15,7 @@ export class AuthGuard implements CanActivate, CanLoad {
     constructor(private authService: AuthService, private router: Router) {}
     canLoad(route: Route, segments: UrlSegment[]): boolean {
         if (!this.authService.isLoggedIn()) {
-            if (route.path?.indexOf('login')) {
+            if (!route.path || route.path.indexOf('login') == -1) {
                 this.router.navigateByUrl('/login');
             }
             return false;

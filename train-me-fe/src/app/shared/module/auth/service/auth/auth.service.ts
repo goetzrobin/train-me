@@ -17,16 +17,10 @@ export class AuthService {
         email: string,
         password: string,
     ): Observable<AuthResponse<any>> {
-        return this.http
-            .post<AuthResponse<any>>(`${this.baseUrl}/login`, {
-                email,
-                password,
-            })
-            .pipe(
-                tap(({ token }) => {
-                    localStorage.setItem(LOCAL_STORAGE_TOKEN, token);
-                }),
-            );
+        return this.http.post<AuthResponse<any>>(`${this.baseUrl}/login`, {
+            email,
+            password,
+        });
     }
 
     public isLoggedIn(): boolean {
