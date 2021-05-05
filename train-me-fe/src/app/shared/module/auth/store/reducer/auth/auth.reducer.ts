@@ -1,9 +1,11 @@
 import { AsyncState } from '../../../../../model/state/AsyncState';
 import { Action, createReducer, on } from '@ngrx/store';
-import * as LoginActions from '../../action/login/login.action';
 import { AsyncStateStatus } from 'src/app/shared/model/state/AsyncStateStatus';
 
-export const key = 'login';
+import * as LoginActions from '../../action/login/login.action';
+import * as ReAuthActions from '../../action/reauth/reauth.action';
+
+export const key = 'auth';
 
 export interface State extends AsyncState {
     email: string | null;
@@ -20,7 +22,7 @@ export const initialState: State = {
     status: AsyncStateStatus.IDLE,
 };
 
-const loginReducer = createReducer(
+const authReducer = createReducer(
     initialState,
     on(LoginActions.login, (state, { email, password }) => ({
         ...state,
@@ -43,8 +45,21 @@ const loginReducer = createReducer(
         authenticated: false,
         status: AsyncStateStatus.ERROR,
     })),
+
+    on(ReAuthActions.reauthenticateSuccess, (state, { token }) => ({
+        ...state,
+        token,
+        authenticated: true,
+        status: AsyncStateStatus.IDLE,
+    })),
+    on(ReAuthActions.reauthenticateFailure, (state) => ({
+        ...state,
+        token: null,
+        authenticated: false,
+        status: AsyncStateStatus.IDLE,
+    })),
 );
 
 export function reducer(state: State | undefined, action: Action) {
-    return loginReducer(state, action);
+    return authReducer(state, action);
 }
