@@ -3,6 +3,7 @@ import { Action, createReducer, on } from '@ngrx/store';
 import { AsyncStateStatus } from 'src/app/shared/model/state/AsyncStateStatus';
 
 import * as LoginActions from '../../action/login/login.action';
+import * as LogoutActions from '../../action/logout/logout.action';
 import * as ReAuthActions from '../../action/reauth/reauth.action';
 
 export const key = 'auth';
@@ -30,10 +31,10 @@ const authReducer = createReducer(
         email,
         status: AsyncStateStatus.LOADING,
     })),
-    on(LoginActions.loginSuccess, (state, { token, user }) => ({
+    on(LoginActions.loginSuccess, (state, { response, email }) => ({
         ...state,
         password: null,
-        token,
+        token: response.token,
         authenticated: true,
         status: AsyncStateStatus.SUCCESS,
     })),
@@ -46,9 +47,18 @@ const authReducer = createReducer(
         status: AsyncStateStatus.ERROR,
     })),
 
-    on(ReAuthActions.reauthenticateSuccess, (state, { token }) => ({
+    on(LogoutActions.logout, (state) => ({
+        ...state,
+        password: null,
+        email: null,
+        token: null,
+        status: AsyncStateStatus.IDLE,
+    })),
+
+    on(ReAuthActions.reauthenticateSuccess, (state, { token, email }) => ({
         ...state,
         token,
+        email,
         authenticated: true,
         status: AsyncStateStatus.IDLE,
     })),

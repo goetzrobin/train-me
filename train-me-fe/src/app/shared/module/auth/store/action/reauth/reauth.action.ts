@@ -6,7 +6,7 @@ export const reauthenticate = createAction(
 
 export const reauthenticateSuccess = createAction(
     '[Initial Load] Could Load Token and Authenticate',
-    props<{ token: string }>(),
+    props<{ token: string; email: string }>(),
 );
 
 export const reauthenticateFailure = createAction(

@@ -5,11 +5,11 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class HomeService {
-    private baseUrl = `${environment.backendUrl}/users`;
+    private baseUrl = `${environment.backendUrl}/exercises`;
 
     constructor(private httpClient: HttpClient) {}
 
-    public getHelloWorld(): Observable<string> {
-        return this.httpClient.get<string>(`${this.baseUrl}/test@train.me`);
+    public getHelloWorld(email: string): Observable<string> {
+        return this.httpClient.get<string>(`${this.baseUrl}/${email}`);
     }
 }

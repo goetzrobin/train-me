@@ -13,6 +13,7 @@ import { AuthGuard } from '../shared/module/auth/guard/auth.guard';
 import { containers } from './container';
 import { components } from './component';
 import { services } from './service';
+import { SharedExerciseModule } from '../shared/module/exercise/shared-exercise.module';
 
 const routes: Routes = [
     {
@@ -26,9 +27,10 @@ const routes: Routes = [
     declarations: [...containers, ...components],
     imports: [
         HttpClientModule,
-        AuthSharedModule,
         CommonModule,
         RouterModule.forChild(routes),
+        AuthSharedModule,
+        SharedExerciseModule,
         MatButtonModule,
         MatIconModule,
         MatToolbarModule,

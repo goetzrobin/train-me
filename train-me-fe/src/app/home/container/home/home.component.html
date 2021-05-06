@@ -1,2 +1,4 @@
 <app-nav-bar (logout)="logout()"></app-nav-bar>
-{{ response | async | json }}
+<ul>
+    <li *ngFor="let exercise of exercises$ | async">{{ exercise.name }}</li>
+</ul>

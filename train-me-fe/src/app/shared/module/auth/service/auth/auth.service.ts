@@ -1,10 +1,9 @@
 import { LOCAL_STORAGE_TOKEN } from './../../model/AuthConstants';
 import { AuthResponse } from './../../model/AuthResponse';
-import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { environment } from '../../../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 @Injectable({
     providedIn: 'root',

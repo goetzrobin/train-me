@@ -4,7 +4,10 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, exhaustMap, switchMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { LOCAL_STORAGE_TOKEN } from 'src/app/shared/module/auth/model/AuthConstants';
+import {
+    LOCAL_STORAGE_EMAIL,
+    LOCAL_STORAGE_TOKEN,
+} from 'src/app/shared/module/auth/model/AuthConstants';
 
 import * as fromLoginActions from '../../action/login/login.action';
 
@@ -16,7 +19,7 @@ export class LoginEffects {
             exhaustMap(({ email, password }) =>
                 this.authService.login(email, password).pipe(
                     switchMap((response) => [
-                        fromLoginActions.loginSuccess(response),
+                        fromLoginActions.loginSuccess({ response, email }),
                     ]),
                     catchError(({ error }: any) =>
                         of(fromLoginActions.loginError(null)),
@@ -30,8 +33,9 @@ export class LoginEffects {
         () =>
             this.actions$.pipe(
                 ofType(fromLoginActions.loginSuccess),
-                tap(({ token }) => {
-                    localStorage.setItem(LOCAL_STORAGE_TOKEN, token);
+                tap(({ response, email }) => {
+                    localStorage.setItem(LOCAL_STORAGE_TOKEN, response.token);
+                    localStorage.setItem(LOCAL_STORAGE_EMAIL, email);
                     this.router.navigate(['/home']);
                 }),
             ),
