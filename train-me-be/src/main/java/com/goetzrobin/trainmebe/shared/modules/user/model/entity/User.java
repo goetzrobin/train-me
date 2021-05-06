@@ -1,5 +1,6 @@
 package com.goetzrobin.trainmebe.shared.modules.user.model.entity;
 
+import com.goetzrobin.trainmebe.app.exercise.model.entity.Exercise;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,10 +16,11 @@ import java.util.Date;
 @Entity
 @Getter
 @Setter
+@Table(name = "usr")
 @NoArgsConstructor
 public class User implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_sysid")
     private Long userSysId;
 
@@ -46,6 +48,12 @@ public class User implements UserDetails {
     @Temporal(TemporalType.TIMESTAMP)
     @UpdateTimestamp
     private Date updateTS;
+
+    @OneToMany(mappedBy = "createUser", fetch = FetchType.LAZY)
+    private Collection<Exercise> createdExercises;
+
+    @OneToMany(mappedBy = "updateUser", fetch = FetchType.LAZY)
+    private Collection<Exercise> lastUpdatedExercises;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -75,5 +83,11 @@ public class User implements UserDetails {
     @Override
     public boolean isCredentialsNonExpired() {
         return isEnabled();
+    }
+
+    public static User from(Long userSysId) {
+        User newUser = new User();
+        newUser.setUserSysId(userSysId);
+        return newUser;
     }
 }
