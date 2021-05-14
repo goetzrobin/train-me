@@ -1,0 +1,19 @@
+<h2>
+    My Exercises
+    <button
+        mat-icon-button
+        mat-mini-fab
+        color="primary"
+        (click)="addExercise()"
+    >
+        <mat-icon>add</mat-icon>
+    </button>
+</h2>
+<div class="exercise-container">
+    <app-home-exercise-card
+        [id]="exercise.id"
+        [name]="exercise.name"
+        [description]="exercise.description"
+        *ngFor="let exercise of exercises$ | async"
+    ></app-home-exercise-card>
+</div>

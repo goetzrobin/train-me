@@ -14,6 +14,7 @@ import { containers } from './container';
 import { reducers, State } from './store';
 
 import { environment } from 'src/environments/environment';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 export const metaReducers: MetaReducer<State>[] = !environment.production
     ? [storeFreeze]
@@ -32,6 +33,7 @@ export const metaReducers: MetaReducer<State>[] = !environment.production
             logOnly: environment.production,
         }),
         EffectsModule.forRoot([]),
+        StoreRouterConnectingModule.forRoot(),
     ],
     providers: [],
     bootstrap: [AppComponent],

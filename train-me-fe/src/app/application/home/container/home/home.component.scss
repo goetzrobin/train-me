@@ -1,0 +1,19 @@
+:host {
+    display: block;
+    padding: 12px;
+}
+button[mat-icon-button] {
+    margin-left: 4px;
+    transform: scale(0.75);
+}
+.exercise {
+    &-container {
+        padding: 10px;
+        display: flex;
+        overflow-x: scroll;
+    }
+}
+
+app-home-exercise-card {
+    margin: 0 30px;
+}

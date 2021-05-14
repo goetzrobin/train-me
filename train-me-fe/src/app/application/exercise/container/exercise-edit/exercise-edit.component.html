@@ -1,0 +1,6 @@
+<h2>{{ (exercise$ | async)?.name }}</h2>
+<app-exercise-edit-form
+    [exerciseToBeEdited]="exercise$ | async"
+    (exerciseUpdate)="updateExercise($event)"
+>
+</app-exercise-edit-form>

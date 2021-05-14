@@ -36,7 +36,7 @@ export class LoginEffects {
                 tap(({ response, email }) => {
                     localStorage.setItem(LOCAL_STORAGE_TOKEN, response.token);
                     localStorage.setItem(LOCAL_STORAGE_EMAIL, email);
-                    this.router.navigate(['/home']);
+                    this.router.navigate(['/app']);
                 }),
             ),
         { dispatch: false },

@@ -8,7 +8,7 @@ import * as fromExerciseActions from '../../action/exercise/exercise.action';
 
 @Injectable()
 export class ExerciseEffects {
-    login$ = createEffect(() =>
+    fetchAll$ = createEffect(() =>
         this.actions$.pipe(
             ofType(fromExerciseActions.fetchAllForUser),
             exhaustMap(({ email }) =>
@@ -28,6 +28,60 @@ export class ExerciseEffects {
                             ),
                         ),
                     ),
+            ),
+        ),
+    );
+
+    fetchById$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(fromExerciseActions.fetchExerciseById),
+            exhaustMap(({ id }) =>
+                this.exerciseService.fetchExerciseById(id).pipe(
+                    switchMap((response) => [
+                        fromExerciseActions.fetchExerciseByIdSuccess({
+                            data: response,
+                        }),
+                    ]),
+                    catchError(({ error }: any) =>
+                        of(fromExerciseActions.fetchExerciseByIdFailure(null)),
+                    ),
+                ),
+            ),
+        ),
+    );
+
+    create$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(fromExerciseActions.createExercise),
+            exhaustMap(({ exercise }) =>
+                this.exerciseService.createExercise(exercise).pipe(
+                    switchMap((response) => [
+                        fromExerciseActions.createExerciseSuccess({
+                            data: response,
+                        }),
+                    ]),
+                    catchError(({ error }: any) =>
+                        of(fromExerciseActions.createExerciseFailure(null)),
+                    ),
+                ),
+            ),
+        ),
+    );
+
+    update$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(fromExerciseActions.updateExercise),
+            exhaustMap(({ exercise }) =>
+                this.exerciseService.updateExercise(exercise).pipe(
+                    switchMap((response) => [
+                        fromExerciseActions.updateExerciseSuccess({
+                            data: response,
+                        }),
+                    ]),
+                    catchError(({ error }: any) =>
+                        of(fromExerciseActions.updateExerciseFailure(null)),
+                    ),
+                ),
             ),
         ),
     );

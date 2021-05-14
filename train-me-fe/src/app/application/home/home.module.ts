@@ -1,19 +1,19 @@
-import { LazyInterceptor } from './../shared/config/LazyInterceptor';
+import { LazyInterceptor } from '../../shared/config/LazyInterceptor';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { HomeComponent } from './container/home/home.component';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { AuthSharedModule } from '../shared/module/auth/auth-shared.module';
-import { AuthGuard } from '../shared/module/auth/guard/auth.guard';
+import { AuthSharedModule } from '../../shared/module/auth/auth-shared.module';
+import { AuthGuard } from '../../shared/module/auth/guard/auth.guard';
+import { SharedExerciseModule } from '../../shared/module/exercise/shared-exercise.module';
 
 import { containers } from './container';
-import { components } from './component';
 import { services } from './service';
-import { SharedExerciseModule } from '../shared/module/exercise/shared-exercise.module';
+import { components } from './component';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 
 const routes: Routes = [
     {
@@ -32,8 +32,8 @@ const routes: Routes = [
         AuthSharedModule,
         SharedExerciseModule,
         MatButtonModule,
+        MatCardModule,
         MatIconModule,
-        MatToolbarModule,
     ],
     providers: [...services, LazyInterceptor],
 })
