@@ -1,6 +1,7 @@
 package com.goetzrobin.trainmebe.app.exercise.dao;
 
 
+import com.goetzrobin.trainmebe.app.exercise.model.dto.ExercisePatchDTO;
 import com.goetzrobin.trainmebe.app.exercise.model.entity.Exercise;
 import com.goetzrobin.trainmebe.shared.modules.security.SecurityHelper;
 import com.goetzrobin.trainmebe.shared.modules.user.model.entity.User;
@@ -15,6 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ExerciseDAOImpl implements ExerciseDAO {
     private final ExerciseRepository exerciseRepository;
+
     @Override
     public List<Exercise> findAll() {
         return exerciseRepository.findAll();
@@ -31,5 +33,17 @@ public class ExerciseDAOImpl implements ExerciseDAO {
     @Override
     public List<Exercise> findAllForUserWithEmail(String email) {
         return exerciseRepository.getExercisesOfUserWithEmail(email);
+    }
+
+    @Override
+    public Exercise findById(Long id) {
+        return exerciseRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public Exercise update(Exercise exercise) {
+        exerciseRepository.updateExercise(exercise.getExerciseSysId(), exercise.getDescription(), SecurityHelper.getCurrentUserSysId());
+        exerciseRepository.flush();
+        return exercise;
     }
 }

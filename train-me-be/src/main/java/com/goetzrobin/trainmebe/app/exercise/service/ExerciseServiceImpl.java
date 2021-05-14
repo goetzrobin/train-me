@@ -2,6 +2,7 @@ package com.goetzrobin.trainmebe.app.exercise.service;
 
 import com.goetzrobin.trainmebe.app.exercise.dao.ExerciseDAO;
 import com.goetzrobin.trainmebe.app.exercise.model.dto.ExerciseGetDTO;
+import com.goetzrobin.trainmebe.app.exercise.model.dto.ExercisePatchDTO;
 import com.goetzrobin.trainmebe.app.exercise.model.dto.ExercisePostDTO;
 import com.goetzrobin.trainmebe.app.exercise.model.mapper.ExerciseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +37,17 @@ public class ExerciseServiceImpl implements ExerciseService {
     @Override
     public List<ExerciseGetDTO> findAllForUserWithEmail(String email) {
         return exerciseMapper.exercisesToExerciseGetDTOs(exerciseDAO.findAllForUserWithEmail(email));
+    }
+
+    @Override
+    public ExerciseGetDTO findById(Long id) {
+        return exerciseMapper.exerciseToExerciseGetDTO(exerciseDAO.findById(id));
+    }
+
+    @Override
+    public ExerciseGetDTO update(ExercisePatchDTO exercisePatchDTO) {
+        return exerciseMapper.exerciseToExerciseGetDTO(
+                exerciseDAO.update(exerciseMapper.exercisePatchDTOToExercise(exercisePatchDTO))
+        );
     }
 }

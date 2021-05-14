@@ -1,6 +1,7 @@
 package com.goetzrobin.trainmebe.app.exercise.model.mapper;
 
 import com.goetzrobin.trainmebe.app.exercise.model.dto.ExerciseGetDTO;
+import com.goetzrobin.trainmebe.app.exercise.model.dto.ExercisePatchDTO;
 import com.goetzrobin.trainmebe.app.exercise.model.dto.ExercisePostDTO;
 import com.goetzrobin.trainmebe.app.exercise.model.entity.Exercise;
 import com.goetzrobin.trainmebe.shared.modules.user.model.entity.User;
@@ -19,11 +20,16 @@ public interface ExerciseMapper {
 
     Exercise exercisePostDTOToExercise(ExercisePostDTO exercise);
 
+    @Mapping(target = "exerciseSysId", source = "id")
+    Exercise exercisePatchDTOToExercise(ExercisePatchDTO exercise);
+
     List<ExerciseGetDTO> exercisesToExerciseGetDTOs(List<Exercise> exercises);
 
     @AfterMapping
     default void setExerciseCreator(@MappingTarget ExerciseGetDTO exerciseGetDTO, Exercise exercise) {
         User creator = exercise.getCreateUser();
-        exerciseGetDTO.setCreator(creator.getFirstName() + " " + creator.getLastName());
+        if (creator != null) {
+            exerciseGetDTO.setCreator(creator.getFirstName() + " " + creator.getLastName());
+        }
     }
 }

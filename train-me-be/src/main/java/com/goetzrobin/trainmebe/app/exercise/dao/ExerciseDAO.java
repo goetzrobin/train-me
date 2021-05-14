@@ -8,4 +8,6 @@ public interface ExerciseDAO {
     List<Exercise> findAll();
     Exercise save(Exercise exercise);
     List<Exercise> findAllForUserWithEmail(String email);
+    Exercise findById(Long id);
+    Exercise update(Exercise exercise);
 }
