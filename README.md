@@ -88,23 +88,13 @@ ng serve
 
 ## Build Process
 
-### NOTE FOR NOW: PLEASE ADJUST THE application.properties of the backend application
-
-For Development
-
-```
-
-```
-
-For Production
-
-```
-
-```
-
 ### Frontend
 
 Since we have a multi stage Dockerfile with its own build step included, all the magic is done by docker and we do not need to manually build our Angular application
+
+```
+WE BUILD AUTOMATICALLY WITH DOCKER. NO MANUAL BUILD NEEDED
+```
 
 However, if you want to trigger the transpilation of your TypeScript source files into JS here is how to do it:
 

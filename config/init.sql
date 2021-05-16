@@ -119,6 +119,9 @@ create table exercise_record (
     foreign key (recorded_by_user_sysid) references usr(user_sysid)
 );
 
+------------------------------------------------------------
+-- END SET UP
+------------------------------------------------------------
 
 -- CREATE APPLICATION USER
 create user if not exists 'springuser' @'%' identified by 'ThePassword';
