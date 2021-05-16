@@ -12,6 +12,6 @@ public interface ExerciseService {
     ExerciseGetDTO save(ExercisePostDTO exercise);
     List<ExerciseGetDTO> findAll();
     List<ExerciseGetDTO> findAllForUserWithEmail(String email);
-    ExerciseGetDTO findById(Long id);
+    Optional<ExerciseGetDTO> findById(Long id);
     ExerciseGetDTO update(ExercisePatchDTO exercise);
 }

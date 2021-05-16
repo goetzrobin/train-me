@@ -11,6 +11,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -36,8 +37,8 @@ public class ExerciseDAOImpl implements ExerciseDAO {
     }
 
     @Override
-    public Exercise findById(Long id) {
-        return exerciseRepository.findById(id).orElse(null);
+    public Optional<Exercise> findById(Long id) {
+        return exerciseRepository.findById(id);
     }
 
     @Override

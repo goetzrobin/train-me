@@ -11,10 +11,10 @@ import javax.validation.constraints.NotNull;
 public class ExercisePatchDTO {
     @JsonProperty("id")
     private String id;
-    @NotNull
+    @NotNull(message = "Name cannot be null")
     @JsonProperty("name")
     private String name;
-    @NotNull
+    @NotNull(message = "Please enter a description")
     @JsonProperty("description")
     private String description;
 }

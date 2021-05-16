@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Component
@@ -40,8 +41,8 @@ public class ExerciseServiceImpl implements ExerciseService {
     }
 
     @Override
-    public ExerciseGetDTO findById(Long id) {
-        return exerciseMapper.exerciseToExerciseGetDTO(exerciseDAO.findById(id));
+    public Optional<ExerciseGetDTO> findById(Long id) {
+        return exerciseDAO.findById(id).map(exercise -> exerciseMapper.exerciseToExerciseGetDTO(exercise));
     }
 
     @Override
