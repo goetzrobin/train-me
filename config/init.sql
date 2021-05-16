@@ -2,6 +2,7 @@
 DROP DATABASE IF EXISTS train_me;
 CREATE DATABASE train_me;
 USE train_me;
+DROP USER IF EXISTS 'springuser' @'%';
 
 -- -------------------------------------------------------- --
 -- SET UP DATA MODEL
