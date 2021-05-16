@@ -9,7 +9,7 @@ Material Design based look and feel for the whole application.
 
 -   [nodejs](https://www.nodejs.org/download) - A JavaScript runtime for your computer that will run the Angular Development server
 -   [Redux Dev Tools](<[https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en)>) - A browser extension that let's you see and debug the State of your Application (optional but recommended)
--   [Train Me Backend](https://www.github.com/goetzrobin/train-me/train-me-be) - The Spring Boot Backend that you will connect to locally through the URL specified in _/src/environments/environment_. It is right here in the same repo!
+-   [Train Me Backend](https://github.com/goetzrobin/train-me/tree/main/train-me-be) - The Spring Boot Backend that you will connect to locally through the URL specified in _/src/environments/environment_. It is right here in the same repo!
 
 ##### Commands
 
