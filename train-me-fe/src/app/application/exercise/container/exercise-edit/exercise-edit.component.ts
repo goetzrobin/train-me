@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Observable, of, Subject } from 'rxjs';
+import { switchMap, takeUntil } from 'rxjs/operators';
 import { AsyncStateStatus } from 'src/app/shared/model/state/AsyncStateStatus';
+import { ErrorService } from 'src/app/shared/module/error/service/error/error.service';
 import { Exercise } from 'src/app/shared/module/exercise/model/Exercise';
 import { ExercisePatchDTO } from 'src/app/shared/module/exercise/model/ExercisePatchDTO';
 import {
@@ -31,6 +32,7 @@ export class ExerciseEditComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         private store: Store,
         private router: Router,
+        private errorService: ErrorService,
     ) {}
 
     public ngOnInit(): void {
@@ -46,6 +48,25 @@ export class ExerciseEditComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroyed$))
             .subscribe((status) => {
                 if (status === AsyncStateStatus.SUCCESS) {
+                    this.router.navigate(['/app']);
+                    this.store.dispatch(resetExerciseUpdateState());
+                }
+            });
+
+        this.store
+            .select(selectExerciseAsyncState)
+            .pipe(
+                takeUntil(this.destroyed$),
+                switchMap((status) => {
+                    return status === AsyncStateStatus.ERROR
+                        ? this.errorService
+                              .displayError('damn I failed to load this')
+                              .afterDismissed()
+                        : of(null);
+                }),
+            )
+            .subscribe((action) => {
+                if (action && action.dismissedByAction) {
                     this.router.navigate(['/app']);
                     this.store.dispatch(resetExerciseUpdateState());
                 }

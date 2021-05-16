@@ -42,9 +42,12 @@ export class ExerciseEffects {
                             data: response,
                         }),
                     ]),
-                    catchError(({ error }: any) =>
-                        of(fromExerciseActions.fetchExerciseByIdFailure(null)),
-                    ),
+                    catchError((error: any) => {
+                        console.log(error);
+                        return of(
+                            fromExerciseActions.fetchExerciseByIdFailure(null),
+                        );
+                    }),
                 ),
             ),
         ),

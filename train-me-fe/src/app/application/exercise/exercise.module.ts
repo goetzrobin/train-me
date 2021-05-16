@@ -14,6 +14,8 @@ import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { ExerciseAddComponent } from './container/exercise-add/exercise-add.component';
+import { ErrorModule } from 'src/app/shared/module/error/error.module';
+import { ErrorService } from 'src/app/shared/module/error/service/error/error.service';
 
 const routes: Routes = [
     {
@@ -43,7 +45,8 @@ const routes: Routes = [
         MatInputModule,
         MatButtonModule,
         ReactiveFormsModule,
+        ErrorModule,
     ],
-    providers: [LazyInterceptor],
+    providers: [LazyInterceptor, ErrorService],
 })
 export class ExerciseModule {}
