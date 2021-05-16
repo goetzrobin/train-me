@@ -49,8 +49,7 @@ public class ExerciseController {
     @GetMapping("/all/{email}")
     public ResponseEntity<List<ExerciseGetDTO>> getAllExercisesForUserWithEmail(@PathVariable String email) {
         try {
-            List<ExerciseGetDTO> exercisesByEmail = exerciseService.findAllForUserWithEmail(email);
-            return !exercisesByEmail.isEmpty() ? ResponseEntity.ok(exercisesByEmail) : ResponseEntity.notFound().build();
+            return ResponseEntity.ok(exerciseService.findAllForUserWithEmail(email));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
