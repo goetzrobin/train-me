@@ -8,7 +8,7 @@ The purpose of this application is to allow users to create their own individual
 
 We have a very simple architecture with one MySQL database, an Angular frontend, and this SpringBoot backend
 
-You can find the frontend application here: [TrainMe Frontend](https://github.com/goetzrobin/train-me/train-me-fe)
+You can find the frontend application here: [TrainMe Frontend](https://github.com/goetzrobin/train-me/tree/maintrain-me-fe)
 
 ## Quick Start
 

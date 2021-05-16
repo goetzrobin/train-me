@@ -112,6 +112,14 @@ npm run build
 
 ### Backend
 
+Same as with the FE, we have a multi stage Dockerfile with its own build step included. The build is done by docker and we do not need to manually build our Spring Boot application
+
+```
+WE BUILD AUTOMATICALLY WITH DOCKER. NO MANUAL BUILD NEEDED
+```
+
+However, if you want to trigger the compilation manually here is how to do it:
+
 First we change into our backend directory **train-me-be**
 
 ```
@@ -126,7 +134,7 @@ Then we just issue the common build command to build our jar
 
 ## Starting Up Production
 
-Since all the hard work is done and we have compiled our Angular frontend in a static index.html and all necessary js and css chunks, and built our jar for our Spring Boot application, all we need to do is use Dockerfiles to copy/mount them in the respective containers and spin up our applications, as well as our MySQL database.
+Since we have dockerized our DB, our FE build stage and application, and our BE build stage and application, all we need to do is use docker-compose to (re)build our images based on our Dockerfiles, then spin up our containers and start our applications and MySQL database.
 
 ```
 docker-compose up

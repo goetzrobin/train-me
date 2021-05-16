@@ -3,9 +3,9 @@ DROP DATABASE IF EXISTS train_me;
 CREATE DATABASE train_me;
 USE train_me;
 
-------------------------------------------------------------
+-- -------------------------------------------------------- --
 -- SET UP DATA MODEL
-------------------------------------------------------------
+-- -------------------------------------------------------- --
 
 
 -- BASIC USER USED FOR AUTH, IDENTIFICATION ----------------
@@ -119,9 +119,9 @@ create table exercise_record (
     foreign key (recorded_by_user_sysid) references usr(user_sysid)
 );
 
-------------------------------------------------------------
+-- -------------------------------------------------------- --
 -- END SET UP
-------------------------------------------------------------
+-- -------------------------------------------------------- --
 
 -- CREATE APPLICATION USER
 create user if not exists 'springuser' @'%' identified by 'ThePassword';
