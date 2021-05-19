@@ -1,13 +1,10 @@
 package com.goetzrobin.trainmebe.app.exercise.dao;
 
 
-import com.goetzrobin.trainmebe.app.exercise.model.dto.ExercisePatchDTO;
 import com.goetzrobin.trainmebe.app.exercise.model.entity.Exercise;
 import com.goetzrobin.trainmebe.shared.modules.security.SecurityHelper;
 import com.goetzrobin.trainmebe.shared.modules.user.model.entity.User;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.jdbc.repository.query.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

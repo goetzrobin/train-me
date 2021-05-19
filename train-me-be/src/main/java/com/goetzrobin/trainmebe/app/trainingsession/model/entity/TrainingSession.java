@@ -1,6 +1,6 @@
-package com.goetzrobin.trainmebe.app.exercise.model.entity;
+package com.goetzrobin.trainmebe.app.trainingsession.model.entity;
 
-import com.goetzrobin.trainmebe.app.trainingsession.model.entity.TrainingSession;
+import com.goetzrobin.trainmebe.app.exercise.model.entity.Exercise;
 import com.goetzrobin.trainmebe.shared.modules.user.model.entity.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +9,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,22 +17,26 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Exercise implements Serializable {
-    private static final long serialVersionUID = -8994873863428597308L;
-
+@Table(name = "training_session")
+public class TrainingSession {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "exercise_sysid")
-    private Long exerciseSysId;
+    @Column(name = "training_session_sysid")
+    private Long trainingSessionSysId;
 
-    @Column(name = "exercise_name")
+    @Column(name = "training_session_name")
     private String name;
 
-    @Column(name = "exercise_description")
+    @Column(name = "training_session_description")
     private String description;
 
-    @ManyToMany(mappedBy = "exercises")
-    private transient Set<TrainingSession> trainingSessions = new HashSet<>();
+    @ManyToMany(cascade = { CascadeType.DETACH })
+    @JoinTable(
+            name = "exercise_training_session",
+            joinColumns = { @JoinColumn(name = "exercise_sysid") },
+            inverseJoinColumns = { @JoinColumn(name = "training_session_sysid") }
+    )
+    private Set<Exercise> exercises = new HashSet<>();
 
     @Column(name = "create_ts")
     @Temporal(TemporalType.TIMESTAMP)

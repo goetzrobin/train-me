@@ -18,9 +18,20 @@ public interface ExerciseMapper {
     @Mapping(target = "id", source = "exerciseSysId")
     ExerciseGetDTO exerciseToExerciseGetDTO(Exercise exercise);
 
+    @Mapping(target = "exerciseSysId", ignore = true)
+    @Mapping(target = "trainingSessions", ignore = true)
+    @Mapping(target = "createUser", ignore = true)
+    @Mapping(target = "createTS", ignore = true)
+    @Mapping(target = "updateTS", ignore = true)
+    @Mapping(target = "updateUser", ignore = true)
     Exercise exercisePostDTOToExercise(ExercisePostDTO exercise);
 
     @Mapping(target = "exerciseSysId", source = "id")
+    @Mapping(target = "trainingSessions", ignore = true)
+    @Mapping(target = "createUser", ignore = true)
+    @Mapping(target = "createTS", ignore = true)
+    @Mapping(target = "updateTS", ignore = true)
+    @Mapping(target = "updateUser", ignore = true)
     Exercise exercisePatchDTOToExercise(ExercisePatchDTO exercise);
 
     List<ExerciseGetDTO> exercisesToExerciseGetDTOs(List<Exercise> exercises);

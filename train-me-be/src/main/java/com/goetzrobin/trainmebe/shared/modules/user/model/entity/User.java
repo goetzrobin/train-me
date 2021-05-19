@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 
 @Entity
@@ -19,6 +20,7 @@ import java.util.Date;
 @Table(name = "usr")
 @NoArgsConstructor
 public class User implements UserDetails {
+    private static final long serialVersionUID = 4375063109640315088L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_sysid")
@@ -50,14 +52,14 @@ public class User implements UserDetails {
     private Date updateTS;
 
     @OneToMany(mappedBy = "createUser", fetch = FetchType.LAZY)
-    private Collection<Exercise> createdExercises;
+    private transient Collection<Exercise> createdExercises;
 
     @OneToMany(mappedBy = "updateUser", fetch = FetchType.LAZY)
-    private Collection<Exercise> lastUpdatedExercises;
+    private transient Collection<Exercise> lastUpdatedExercises;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return Collections.emptyList();
     }
 
     @Override

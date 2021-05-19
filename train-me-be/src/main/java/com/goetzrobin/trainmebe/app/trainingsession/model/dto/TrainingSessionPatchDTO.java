@@ -1,4 +1,4 @@
-package com.goetzrobin.trainmebe.app.exercise.model.dto;
+package com.goetzrobin.trainmebe.app.trainingsession.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
-public class ExercisePatchDTO {
+public class TrainingSessionPatchDTO {
     @NotNull(message = "Id required for Update")
     @JsonProperty("id")
     private String id;

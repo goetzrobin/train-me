@@ -1,19 +1,18 @@
-package com.goetzrobin.trainmebe.app.exercise.model.dto;
+package com.goetzrobin.trainmebe.app.trainingsession.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
-public class ExerciseGetDTO {
-    @JsonProperty("id")
-    private String id;
+public class TrainingSessionPostDTO {
+    @NotNull
     @JsonProperty("name")
     private String name;
+    @NotNull
     @JsonProperty("description")
     private String description;
-    @JsonProperty("creator")
-    private String creator;
 }

@@ -42,7 +42,7 @@ public class ExerciseServiceImpl implements ExerciseService {
 
     @Override
     public Optional<ExerciseGetDTO> findById(Long id) {
-        return exerciseDAO.findById(id).map(exercise -> exerciseMapper.exerciseToExerciseGetDTO(exercise));
+        return exerciseDAO.findById(id).map(exerciseMapper::exerciseToExerciseGetDTO);
     }
 
     @Override
