@@ -82,6 +82,7 @@ create table training_plan_type (
 -- EACH TRAINING SESSION IS MADE UP OF MULTIPLE EXERCISES
 -- EXERCISES CAN BE USED BY MULTIPLE TRAINING SESSIONS
 create table exercise_training_session (
+	exercise_training_session_sysid int not null auto_increment,
     exercise_sysid int not null,
     training_session_sysid int not null,
     foreign key (exercise_sysid) references exercise(exercise_sysid),
